@@ -1,23 +1,25 @@
 import { Schema, model } from "mongoose";
 
-const brandSchema = new Schema(
+const subCategorySchema = new Schema(
   {
     name: {
       type: String,
       unique: true,
       required: true,
       trim: true,
+      minlength: [2, "too short subCategory name "],
     },
     slug: {
       type: String,
       lowercase: true,
     },
-    logo: {
-      type: String,
+    category: {
+      type: Schema.ObjectId,
       required: true,
+      ref: "category",
     },
   },
   { timestamps: true }
 );
 
-export const brandModel = model("brand", brandSchema);
+export const subCategoryModel = model("subCategory", subCategorySchema);
